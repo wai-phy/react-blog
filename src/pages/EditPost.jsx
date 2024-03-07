@@ -9,6 +9,7 @@ const EditPost = () => {
         header={"Edit your post now!!"}
         postBtn={"Edit Post"}
         oldPostData={post}
+        method={"patch"}
       />
     </section>
   );

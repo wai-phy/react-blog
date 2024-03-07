@@ -3,7 +3,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { Link, useSubmit } from "react-router-dom";
 
 const PostDetails = ({ post }) => {
-  const { id, title, image, date, description } = post;
+  const {  title, image, date, description } = post;
   const submit = useSubmit();
   const postDeleteHandler = () => {
     const conFirmStatus = window.confirm("Are you sure you want to delete this?");
@@ -17,7 +17,7 @@ const PostDetails = ({ post }) => {
       <h1>Post Details</h1>
       <div className="post-detail">
         <div>
-          <h2>{title}</h2>
+          <h2>{title.toUpperCase()}</h2>
           <p className="date">
             <CalendarDaysIcon className="dateIcon" />
             {date}

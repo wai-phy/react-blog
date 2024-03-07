@@ -1,8 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./layouts/Main";
 import Posts, { loader as postsLoader } from "./pages/Posts";
-import { action as deleteAction, loader as postDetailLoader } from "./pages/Details";
-import { action as postCreateAction } from "./pages/Create";
+import {
+  action as deleteAction,
+  loader as postDetailLoader,
+} from "./pages/Details";
+import { action as postCreateAction } from "./components/PostForm";
+import { action as postUpdateAction } from "./components/PostForm";
 import Create from "./pages/Create";
 import Details from "./pages/Details";
 import EditPost from "./pages/EditPost";
@@ -38,6 +42,7 @@ const App = () => {
             {
               path: "edit-post",
               element: <EditPost />,
+              action: postUpdateAction,
             },
           ],
         },

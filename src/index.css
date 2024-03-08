@@ -202,3 +202,29 @@ a{
 button{
   cursor: pointer;
 }
+
+.login-btn{
+  width: 50%;
+  background-color: palevioletred;
+  color: blue;
+  padding: 8px 10px;
+  margin-top:10px;
+}
+
+.sign-up{
+  color: green;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #FF3D00;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: aqua;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+  }

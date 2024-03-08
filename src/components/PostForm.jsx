@@ -1,6 +1,7 @@
 import { Form, Link, redirect, useActionData } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import uuid from "react-uuid";
+import { getToken } from "../utils/getToken";
 
 const PostForm = ({ header, postBtn, oldPostData, method }) => {
   const data = useActionData();
@@ -49,9 +50,12 @@ const PostForm = ({ header, postBtn, oldPostData, method }) => {
         </div>
         <div>
           <label htmlFor="form-desc">Description</label>
-          <textarea name="description" id="form-desc" cols="50" rows="6">
-            {oldPostData ? oldPostData.description : ""}
-          </textarea>
+          <textarea
+            name="description"
+            id="form-desc"
+            cols="50"
+            rows="6"
+          >{oldPostData ? oldPostData.description : ""}</textarea>
         </div>
         <button className="post-btn">{postBtn}</button>
       </Form>
@@ -64,7 +68,7 @@ export default PostForm;
 export const action = async ({ request, params }) => {
   const data = await request.formData();
   const method = request.method;
-
+  const token = getToken();
   const postData = {
     id: uuid(),
     title: data.get("title"),
@@ -83,6 +87,7 @@ export const action = async ({ request, params }) => {
     method,
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
     },
     body: JSON.stringify(postData),
   });

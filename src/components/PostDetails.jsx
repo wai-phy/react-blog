@@ -1,15 +1,18 @@
 import { CalendarDaysIcon } from "@heroicons/react/24/solid";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-import { Link, useSubmit } from "react-router-dom";
+import { Link, useRouteLoaderData, useSubmit } from "react-router-dom";
 
 const PostDetails = ({ post }) => {
-  const {  title, image, date, description } = post;
+  const { title, image, date, description } = post;
   const submit = useSubmit();
+  const isToken = useRouteLoaderData("root");
   const postDeleteHandler = () => {
-    const conFirmStatus = window.confirm("Are you sure you want to delete this?");
+    const conFirmStatus = window.confirm(
+      "Are you sure you want to delete this?"
+    );
 
     if (conFirmStatus) {
-      submit(null,{method: "DELETE"});
+      submit(null, { method: "DELETE" });
     }
   };
   return (
@@ -30,12 +33,16 @@ const PostDetails = ({ post }) => {
       <img src={image} alt={title} />
       <p>{description}</p>
       <div className="detail-footer">
-        <Link to={`edit-post`}>
-          <p className="sm-edit">Edit</p>
-        </Link>
-        <p className="sm-delete" onClick={postDeleteHandler}>
-          Delete
-        </p>
+        {isToken && (
+          <Link to={`edit-post`}>
+            <p className="sm-edit">Edit</p>
+          </Link>
+        )}
+        {isToken && (
+          <p className="sm-delete" onClick={postDeleteHandler}>
+            Delete
+          </p>
+        )}
       </div>
     </section>
   );

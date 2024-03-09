@@ -3,6 +3,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import uuid from "react-uuid";
 import { getToken } from "../utils/getToken";
 
+
 const PostForm = ({ header, postBtn, oldPostData, method }) => {
   const data = useActionData();
   return (
@@ -50,12 +51,9 @@ const PostForm = ({ header, postBtn, oldPostData, method }) => {
         </div>
         <div>
           <label htmlFor="form-desc">Description</label>
-          <textarea
-            name="description"
-            id="form-desc"
-            cols="50"
-            rows="6"
-          >{oldPostData ? oldPostData.description : ""}</textarea>
+          <textarea name="description" id="form-desc" cols="50" rows="6">
+            {oldPostData ? oldPostData.description : ""}
+          </textarea>
         </div>
         <button className="post-btn">{postBtn}</button>
       </Form>
@@ -77,10 +75,10 @@ export const action = async ({ request, params }) => {
     date: data.get("date"),
   };
 
-  let url = "http://localhost:8080/posts";
+  let url = `${process.env.REACT_APP_DOMAIN}/posts`;
   if (method === "PATCH") {
     const id = params.id;
-    url = `http://localhost:8080/posts/${id}`;
+    url = `${process.env.REACT_APP_DOMAIN}/posts/${id}`;
   }
 
   const response = await fetch(url, {
